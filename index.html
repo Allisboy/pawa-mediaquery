@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>mediaquery</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <!-- <script src="https://cdn.jsdelivr.net/npm/pawajs@1.0.3/cdn/index.js" type="module"></script> -->
+        <style>
+            .pawa-loader{
+                display:none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" class="pawa-loader">
+            <h1>@{allwell.value.name}</h1>
+            
+            <h1 $media-max="678px">small screen</h1>
+            <h1 $media-min="679px">large screen</h1>
+        </div>
+        <script src="./main.js" type="module"></script>
+    </body>
+</html>

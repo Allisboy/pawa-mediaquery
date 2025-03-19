@@ -1,0 +1,23 @@
+{
+  "name": "pawa-usemediaquery",
+  "version": "1.0.0",
+  "description": "media query for pawajs library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Allisboy/pawa-mediaquery.git"
+  },
+  "keywords": [
+    "mediaquery",
+    "pawajs",
+    "tool"
+  ],
+  "author": "Allwell Oriso-owubo Owupele",
+  "license": "ISC",
+  "peerDependencies": {
+    "pawajs": "^1.0.0"
+  }
+}
