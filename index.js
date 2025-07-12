@@ -1,73 +1,25 @@
-import { setPlugin, state } from "pawajs"
-import { createEffect } from "pawajs/reactive.js"
+import { $state,runEffect } from './index.js';
 
-const max=(el,value,context)=>{
-    const comment=document.createComment(`media-max-${value}`)
-    const quering = state(window.matchMedia(`(max-width:${value})`).matches)
-    const media=window.matchMedia(`(max-width:${value})`)
-    media.addEventListener('change', (e) => {
-        if (e.matches) {
-            quering.value=true
-        } else {
-            quering.value=false
-        }
-    })
-    const evaluate=()=>{
-        // context
-            if(quering.value){
-                comment.replaceWith(el)
-            }else{
-                el.replaceWith(comment)
-            }
-    }
-    createEffect(()=>{
-        evaluate()
-    })
-}
-const min=(el,value,context)=>{
-    const comment=document.createComment(`media-min-${value}`)
-    const quering = state(window.matchMedia(`(min-width:${value})`).matches)
-    const media=window.matchMedia(`(min-width:${value})`)
-    media.addEventListener('change', (e) => {
-        if (e.matches) {
-            quering.value=true
-        } else {
-            quering.value=false
-        }
-    })
-    const evaluate=()=>{
-        // context
-            if(quering.value){
-                comment.replaceWith(el)
-            }else{
-                el.replaceWith(comment)
-            }
-    }
-    createEffect(()=>{
-        evaluate()
-    })
-}
- const useAttriMedia=(attriPlugin,power)=>{
-    const attribute=(el,attr,context)=>{
-        if(attr.name ==='$media-max'){
-            max(el,attr.value,context)
-        }else if(attr.name === '$media-min'){
-            min(el,attr.value,context)
-        }
-    }
-    attriPlugin.push(attribute)
-}
-export const useMediaQuery=(value)=>{
-    
-    const quering = state(window.matchMedia(value).matches)
-    const media=window.matchMedia(value)
-    media.addEventListener('change', (e) => {
-        if (e.matches) {
-            quering.value=true
-        } else {
-            quering.value=false
-        }
-    })
-    return quering
-}
-export default useAttriMedia
+export const useMediaQuery = (query) => {
+  const media = window.matchMedia(query);
+  const matches = $state(media.matches);
+  
+  const updateMatch = (e) => {
+    matches.value = e.matches;
+  };
+  
+  // Optional: Clean up function 
+  runEffect(() => {
+    media.addEventListener('change', updateMatch);
+      return ()=>{
+        // Attach cleanup if needed
+  
+    media.removeEventListener('change', updateMatch);
+
+      }
+  })
+  return matches;
+};
+
+// Usage:
+// const isSmall = useMediaQuery('(max-width: 678px)')

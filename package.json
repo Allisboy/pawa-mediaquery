@@ -18,6 +18,6 @@
   "author": "Allwell Oriso-owubo Owupele",
   "license": "ISC",
   "peerDependencies": {
-    "pawajs": "^1.0.0"
+    "pawajs": "^1.0.6"
   }
 }
